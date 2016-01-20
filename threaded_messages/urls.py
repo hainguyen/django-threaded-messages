@@ -1,10 +1,10 @@
-from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to
+from django.conf.urls import patterns, url
+from django.views.generic import RedirectView
 
 from threaded_messages.views import *
 
 urlpatterns = patterns('',
-    url(r'^$', redirect_to, {'url': 'inbox/'}),
+    url(r'^$', RedirectView.as_view(permanent=True, url='inbox/'), name='messages_redirect'),
     url(r'^search/$', search, name='messages_search'),
     url(r'^inbox/$', inbox, name='messages_inbox'),
     url(r'^outbox/$', outbox, name='messages_outbox'),
